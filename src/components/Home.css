@@ -1,0 +1,16 @@
+.brand, .profile-link, .page-title{
+  min-width: 33%;
+}
+.brand{
+  text-align: left;
+}
+.brand > img{
+  max-height: 5rem;
+}
+.profile-link{
+  text-align: right;
+}
+.page-title{
+  font-weight: 500;
+  font-size: 30px;
+}

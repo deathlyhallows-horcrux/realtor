@@ -1,0 +1,15 @@
+#features-table caption{
+  caption-side: top;
+  text-align: center;
+  font-weight: 500;
+}
+
+table tr td{
+  text-align: left;
+  padding: 1%;
+}
+.column-button{
+  background: transparent;
+  border: none;
+
+}
