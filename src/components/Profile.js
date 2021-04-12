@@ -2,15 +2,14 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Profile.css';
 
- const Profile = (props) => {
+ const Profile = () => {
   const location = useLocation();
   const {profile} = location.state;
 
-  //console.log("profile props are", profile);
   return (
     
     <div className="profile-view" >
-      <h5>Profile</h5>
+      <h5 className="profile-title">Profile</h5>
       <div className="profile-content d-flex">
         <div className="profile-image">
           <img src= {profile.avatarImage} width="200" ></img>

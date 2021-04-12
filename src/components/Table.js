@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import { useHistory } from "react-router-dom";
 import '../styles/Table.css';
+import {NavLink} from 'react-router-dom';
 import moment from 'moment';
 
 const Table = (props) => {
   const {data} = props;
   const {features} = data;
-  const history = useHistory();
+
+  const handleToggle = (e) => {
+     e.target.className = "visited";
+  };
+
   //get sorted data 
   const {sortedFeatures, setSort, sortedColumn} = useSortedData(features);
   
@@ -16,10 +20,6 @@ const Table = (props) => {
     }
     return sortedColumn.key === name ? sortedColumn.direction : undefined;
   };
-  
-  const toDetailView = (feature) => {
-    history.push('/detail', {feature})
-  }
 
   return (
     <table className="features-table">
@@ -33,12 +33,12 @@ const Table = (props) => {
       </thead>
       <tbody>
         {sortedFeatures.map((feature,index) => (
-          <tr key={index} onClick={() => toDetailView({feature})}>
-            {/* <Link to={{pathname: '/detail', state: {feature: feature}}}> */}
-            <td className="feature-title">{feature.properties.title}</td>
+          <tr key={index} >
+            <td  className="feature-title"  >
+              <NavLink to={{pathname: '/detail', state: {feature: feature}}}  onClick={handleToggle} className="feature-link">{feature.properties.title}</NavLink>
+              </td>
             <td className="feature-mag">{feature.properties.mag}</td>
             <td className="feature-time">{moment(feature.properties.time).format("lll") }</td>
-            {/* </Link> */}
           </tr>
         ))}
       </tbody>
@@ -46,7 +46,7 @@ const Table = (props) => {
   );
 };
 
-
+//sort function 
 const useSortedData = (features, selectedColumn = {key: '', direction: ''}) => {
   // sort table data based on the column selected and its current sort order
   const [sortedColumn, setSortedColumn] = useState(selectedColumn);

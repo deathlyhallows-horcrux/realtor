@@ -3,29 +3,38 @@
   text-align: center;
   font-weight: bold;
   color: #444444;
+  padding: 5%;
 }
 .features-table{
-  width: 35%;
+  /* width: 35%; */
+  font-weight: 500;
 }
 .features-table tr th{
   text-align: center;
 }
-/* .features-table tr td{
-  text-align: left;
-  padding: 1%;
-} */
+.feature-link{
+  color: #6600cc ;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.visited{
+  background-color: yellow ;
+  font-weight: bold;
+}
 button{
   background: transparent;
   border: none;
-
 }
 .feature-mag{
   text-align: center;
+  font-weight: 400;
 }
 .feature-title{
   text-align: left;
 }
-
+.feature-time{
+  font-weight: 400;
+}
 thead button.ascending::after {
   content: '👇';
   display: inline-block;

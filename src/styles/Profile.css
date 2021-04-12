@@ -9,9 +9,10 @@
   vertical-align: top;
 }
 .profile-view{
-  width: 30%;
+  max-width: 50% !important;
   margin-top: 5%;
   margin: auto;
+  color: #444444;
 }
 .profile-details td{
   text-align: left;

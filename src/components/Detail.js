@@ -1,15 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Detail.css';
+import moment from 'moment';
 
-const Detail = (props) => {
+const Detail = () => {
   const location = useLocation();
-  const {feature} = location.state.feature
+  const {feature} = location.state
 
   console.log("detail is" , feature);
   return (
     <div className="container">
-      {/* <h1>{feature.properties.title}</h1> */}
       <table className="detail-view-table">
         <colgroup>
         <col className="column-width" ></col></colgroup>
@@ -26,7 +26,7 @@ const Detail = (props) => {
           </tr>
           <tr>
             <th  scope="row">Time</th>
-            <td>{feature.properties.time}</td>
+            <td>{moment(feature.properties.time).format("lll") }</td>
           </tr>
           <tr>
             <th  scope="row">Status</th>

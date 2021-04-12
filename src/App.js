@@ -17,7 +17,6 @@ const App = () => (
     <Route path="/profile" exact component={Profile}></Route> 
     <Route path="/detail" exact component={Detail}></Route> 
     </Switch>
-    {/* <Home></Home> */}
   </div>
  
 )
