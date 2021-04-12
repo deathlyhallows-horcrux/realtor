@@ -16,15 +16,15 @@ const Home = () => {
       {data  && data.features ? <Table data={data} ></Table> : null} 
       
     </div>
-    <div>
+    {/* <div>
     {data&& data.features ? data.features.map((feature, index) => {
       console.log(JSON.stringify(feature.properties));
         return (
-            <div key ={index}>{feature.properties.title} {"-"} {feature.properties.magType}
+            <div key ={index}>{feature.properties.title} {"-"} {feature.properties.magType} {"-"} {feature.properties.}
             </div>
         )
       }) : null}
-    </div>
+    </div> */}
   </div>
   );
   
