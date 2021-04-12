@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import '../styles/Table.css';
 import {NavLink} from 'react-router-dom';
 import moment from 'moment';
+import setViewedLinksAction from '../actions/setViewedLinksAction';
 
 const Table = (props) => {
-  const {data} = props;
+  const {data, viewed} = props;
   const {features} = data;
-
-  const handleToggle = (e) => {
-     e.target.className = "visited";
-  };
+  const dispatch = useDispatch();
 
   //get sorted data 
   const {sortedFeatures, setSort, sortedColumn} = useSortedData(features);
@@ -22,6 +21,7 @@ const Table = (props) => {
   };
 
   return (
+    <div>
     <table className="features-table">
       <caption>{data.metadata.title}</caption>
       <thead>
@@ -35,7 +35,7 @@ const Table = (props) => {
         {sortedFeatures.map((feature,index) => (
           <tr key={index} >
             <td  className="feature-title"  >
-              <NavLink to={{pathname: '/detail', state: {feature: feature}}}  onClick={handleToggle} className="feature-link">{feature.properties.title}</NavLink>
+              <NavLink to={{pathname: '/detail', state: {feature: feature}}}  onClick={() => dispatch(setViewedLinksAction(feature.id))} className={`feature-link ${viewed.find(id => id === feature.id) ? "visited": ""} `} >{feature.properties.title}</NavLink>
               </td>
             <td className="feature-mag">{feature.properties.mag}</td>
             <td className="feature-time">{moment(feature.properties.time).format("lll") }</td>
@@ -43,6 +43,7 @@ const Table = (props) => {
         ))}
       </tbody>
     </table>
+     </div>
   );
 };
 

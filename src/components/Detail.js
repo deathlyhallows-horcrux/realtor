@@ -7,7 +7,6 @@ const Detail = () => {
   const location = useLocation();
   const {feature} = location.state
 
-  console.log("detail is" , feature);
   return (
     <div className="container">
       <table className="detail-view-table">

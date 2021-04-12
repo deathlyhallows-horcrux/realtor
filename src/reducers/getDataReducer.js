@@ -1,13 +1,15 @@
 import {GETDATA} from  '../actions/getDataAction';
+import { GETVIEWEDLINKS } from '../actions/setViewedLinksAction';
 
 const initialState = {
   site: {},
   profile: {},
-  data: {}
+  data: {},
+  viewedLinks: []
 }
 
 const getDataReducer = (state = initialState, action) => {
-  console.log(action.payload);
+
   switch(action.type){
     case GETDATA: 
       return {
@@ -16,6 +18,11 @@ const getDataReducer = (state = initialState, action) => {
         profile: action.payload.profile,
         data: action.payload.data
       }
+      case GETVIEWEDLINKS: 
+        return{
+          ...state,
+          viewedLinks: state.viewedLinks.concat(action.payload)
+        }
     default:
       return state;
   }

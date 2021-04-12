@@ -13,12 +13,12 @@
   text-align: center;
 }
 .feature-link{
-  color: #6600cc ;
+  color: #0011bb;
   text-decoration: underline;
   font-weight: bold;
 }
 .visited{
-  color: #0011bb;
+  color: #6600cc ;
   font-weight: bold;
 }
 button{
