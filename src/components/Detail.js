@@ -1,17 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import '../styles/Detail.css';
 
-export default class Detail extends Component {
-  constructor(props){
-    super(props);
-    
-  }
+const Detail = (props) => {
+  const location = useLocation();
+  const {feature} = location.state.feature
 
-  render() {
-    console.log("detail view is",this.props.location.state);
-    return (
-      <div>
-        dDetail loaded!
-      </div>
-    )
-  }
+  console.log("detail is" , feature);
+  return (
+    <div className="container">
+      {/* <h1>{feature.properties.title}</h1> */}
+      <table className="detail-view-table">
+        <colgroup>
+        <col className="column-width" ></col></colgroup>
+        <caption>{feature.properties.title}</caption>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <th  scope="row">Title</th>
+            <td>{feature.properties.title}</td>
+          </tr>
+          <tr>
+            <th  scope="row">Magnitude</th>
+            <td>{feature.properties.mag}</td>
+          </tr>
+          <tr>
+            <th  scope="row">Time</th>
+            <td>{feature.properties.time}</td>
+          </tr>
+          <tr>
+            <th  scope="row">Status</th>
+            <td>{feature.properties.status}</td>
+          </tr>
+          <tr>
+            <th  scope="row">Tsunami</th>
+            <td>{feature.properties.tsunami}</td>
+          </tr>
+          <tr>
+            <th  scope="row">Type</th>
+            <td>{feature.properties.type}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
 }
+
+export default Detail;

@@ -1,0 +1,18 @@
+.detail-view-table caption{
+  caption-side: top;
+  text-align: center;
+  font-weight: bold;
+  color: #444444;
+}
+.detail-view-table th{
+  text-align: left;
+}
+.detail-view-table td{
+  text-align: left;
+}
+.detail-view-table{
+  margin: auto;
+}
+.column-width{
+  width: 30%;
+}

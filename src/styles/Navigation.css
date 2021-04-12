@@ -1,0 +1,33 @@
+
+.brand{
+  text-align: left;
+} 
+.brand-image{
+  max-height: 4rem;
+}
+.profile-link{
+  text-align: right;
+}
+.profile-link a{
+  color: #6600cc !important;
+  text-decoration: underline !important;
+  font-weight: 600;
+}
+.page-title{
+  font-weight: bold;
+  font-size: 30px;
+  color: #777777;
+}
+.navbar{
+  width: 100%;
+  color: #ededed;
+}
+.nav-item{
+  display: inline-block;
+  width: 33%;
+}
+/* #ededed
+#777777
+#444444
+#0011bb
+#6600cc */

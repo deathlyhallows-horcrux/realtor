@@ -1,0 +1,38 @@
+.features-table caption{
+  caption-side: top;
+  text-align: center;
+  font-weight: bold;
+  color: #444444;
+}
+.features-table{
+  width: 35%;
+}
+.features-table tr th{
+  text-align: center;
+}
+/* .features-table tr td{
+  text-align: left;
+  padding: 1%;
+} */
+button{
+  background: transparent;
+  border: none;
+
+}
+.feature-mag{
+  text-align: center;
+}
+.feature-title{
+  text-align: left;
+}
+
+thead button.ascending::after {
+  content: '👇';
+  display: inline-block;
+  margin-left: 1em;
+}
+thead button.descending::after {
+  content: '☝️';
+  display: inline-block;
+  margin-left: 1em;
+}

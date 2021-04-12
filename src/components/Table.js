@@ -1,36 +1,44 @@
 import React, {useState} from 'react';
-import { Button } from 'react-bootstrap';
-import './Table.css';
+import { useHistory } from "react-router-dom";
+import '../styles/Table.css';
+import moment from 'moment';
 
 const Table = (props) => {
   const {data} = props;
-  const {features, requestSort, sortColumn} = useSortableData(props.data.features);
-
+  const {features} = data;
+  const history = useHistory();
+  //get sorted data 
+  const {sortedFeatures, setSort, sortedColumn} = useSortedData(features);
+  
   const getClassNamesFor = (name) => {
-    if (!sortColumn) {
+    if (!sortedColumn) {
       return;
     }
-    return sortColumn.key === name ? sortColumn.direction : undefined;
+    return sortedColumn.key === name ? sortedColumn.direction : undefined;
   };
- 
+  
+  const toDetailView = (feature) => {
+    history.push('/detail', {feature})
+  }
 
-    //console.log("field to be sorted", sortColumn);
   return (
-    <table id="features-table">
+    <table className="features-table">
       <caption>{data.metadata.title}</caption>
       <thead>
         <tr>
-          <th><button className="column-button" type="button" onClick={() => requestSort('title')} className={getClassNamesFor('title')}> Title </button></th>
-          <th><button className="column-button" type="button" onClick={() => requestSort('mag')} className={getClassNamesFor('mag')}> Magnitude </button></th>
-          <th><button className="column-button" type="button" onClick={() => requestSort('time')} className={getClassNamesFor('time')}> Time </button></th>
+          <th><button  type="button" onClick={() => setSort('title')} className={getClassNamesFor('title')}> Title </button></th>
+          <th><button type="button" onClick={() => setSort('mag')} className={getClassNamesFor('mag')}> Magnitude </button></th>        
+          <th><button type="button" onClick={() => setSort('time')} className={getClassNamesFor('time')}> Time </button></th>
         </tr>
       </thead>
       <tbody>
-        {features.map((feature,index) => (
-          <tr key={index}>
-            <td>{feature.properties.title}</td>
-            <td>{feature.properties.mag}</td>
-            <td>{feature.properties.time}</td>
+        {sortedFeatures.map((feature,index) => (
+          <tr key={index} onClick={() => toDetailView({feature})}>
+            {/* <Link to={{pathname: '/detail', state: {feature: feature}}}> */}
+            <td className="feature-title">{feature.properties.title}</td>
+            <td className="feature-mag">{feature.properties.mag}</td>
+            <td className="feature-time">{moment(feature.properties.time).format("lll") }</td>
+            {/* </Link> */}
           </tr>
         ))}
       </tbody>
@@ -38,34 +46,37 @@ const Table = (props) => {
   );
 };
 
-const useSortableData = (features, column = null) => {
-  const [sortColumn, setSortColumn] = useState(column);
 
-  //sorting the table 
+const useSortedData = (features, selectedColumn = {key: '', direction: ''}) => {
+  // sort table data based on the column selected and its current sort order
+  const [sortedColumn, setSortedColumn] = useState(selectedColumn);
+
   const sortedFeatures = React.useMemo(() => {
-    let sortedFeatures = [...features];
-    if(sortColumn !== null){
-      sortedFeatures.sort((a,b) => {
-        if (a[sortColumn.key] < b[sortColumn.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
+    const sortedFeatures = [...features];
+    if(sortedColumn !== null){
+      sortedFeatures.sort((a, b) =>{
+        if (a.properties[sortedColumn.key] < b.properties[sortedColumn.key]) {
+          return sortedColumn.direction === 'ascending' ? -1 : 1;
         }
-        if (a[sortColumn.key] > b[sortColumn.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;;
+        if (a.properties[sortedColumn.key] > b.properties[sortedColumn.key]) {
+          return sortedColumn.direction === 'ascending' ? 1 : -1;
         }
         return 0;
-      }); 
+      });
     }
     return sortedFeatures;
-  }, [features, sortColumn]);
-   
-    const requestSort = key => {
-      let direction = 'ascending';
-      if (sortColumn.key === key && sortColumn.direction === 'ascending') {
-        direction = 'descending';
-      }
-      setSortColumn({ key, direction });
+  }, [features, sortedColumn]);
+
+  //set sort order on click 
+  const setSort = key => {
+    let sortDirection = 'ascending';
+    if( sortedColumn.key === key && sortedColumn.direction === 'ascending'){
+      sortDirection = 'descending';
     }
-    return { features: sortedFeatures, requestSort };
-  };
+    
+    setSortedColumn({key: key, direction: sortDirection});
+  }
+  return { sortedFeatures: sortedFeatures, setSort, sortedColumn}
+};
 
 export default Table;
